@@ -38,7 +38,7 @@ const logItems8a = (n) => {
 // logItems8a(10);
 
 // BIG O OF O(n3)
-// SIMPLEFIED TO O(n2)
+// SIMPLEFIED TO O(n2) or O(n^2)
 // growth is exponential so can be grouped together with above function for a BIG O of O(n2)
 // BIG O has different categorys for simplification due to differences in processer speed, language etc
 const logItems8b = (n) => {
