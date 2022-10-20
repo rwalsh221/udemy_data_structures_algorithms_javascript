@@ -90,23 +90,92 @@ class LinkedList {
     }
     return currentHead;
   }
+  // RETURN NODE AT INDEX
+  get(index) {
+    if (index < 0 || index >= this.length) {
+      return undefined;
+    }
+    if (index === 0) {
+      return this.head;
+    }
+    let nodeHead = this.head;
+    for (let i = 0; i < index; i += 1) {
+      nodeHead = nodeHead.next;
+    }
+
+    return nodeHead;
+  }
+  //   CHANGE NODE VALUE AT INDEX
+  set(index, value) {
+    let temp = this.get(index);
+
+    if (temp) {
+      temp.value = value;
+      return true;
+    }
+    return false;
+  }
+  //   INSERT NODE AT INDEX
+  insert(index, value) {
+    // ADD TO BEGINING
+    if (index === 0) {
+      return this.unshift(value);
+    }
+    // ADD TO END
+    if (index === this.length) {
+      return this.push(value);
+    }
+    // OUT OF RANGE
+    if (index < 0 || index > this.length) {
+      return false;
+    }
+
+    const newNode = new Node(value);
+    const temp = this.get(index - 1);
+    newNode.next = temp.next;
+    temp.next = newNode;
+    this.length += 1;
+    return true;
+  }
+  //   REMOVE NODE AT INDEX AND RETURN NODE
+  remove(index) {
+    // REMOVE FROM BEGINING
+    if (index === 0) {
+      return this.shift();
+    }
+    // REMOVE FROM END
+    if (index === this.length - 1) {
+      return this.pop();
+    }
+    // OUT OF RANGE
+    if (index < 0 || index >= this.length) {
+      return undefined;
+    }
+    const pre = this.get(index - 1);
+    const temp = pre.next;
+
+    pre.next = temp.next;
+    temp.next = null;
+
+    this.length -= 1;
+    return temp;
+  }
 }
 
-let myLinkedList = new LinkedList(4);
+let myLinkedList = new LinkedList(0);
 
-console.log(myLinkedList.push(5));
-console.log(myLinkedList.push(10));
+console.log(myLinkedList.push(2));
+// console.log(myLinkedList.push(10));
 // console.log(myLinkedList.pop());
 // console.log(myLinkedList.pop());
 // console.log(myLinkedList.pop());
 // console.log(myLinkedList.pop());
-console.log(myLinkedList.unshift(8));
-console.log(myLinkedList.shift());
-console.log(myLinkedList.shift());
-console.log(myLinkedList.shift());
-console.log(myLinkedList.shift());
-console.log(myLinkedList.shift());
-console.log(myLinkedList.shift());
+// console.log(myLinkedList.unshift(8));
+// console.log(myLinkedList.unshift(3));
+// console.log(myLinkedList.get(5));
+// console.log(myLinkedList.set(1, 2));
+console.log(myLinkedList.insert(1, 1));
+console.log(myLinkedList.remove(1));
 
 // pop:
 // edge case - empty or one item
