@@ -19,8 +19,22 @@ class LinkedList {
     this.tail = this.head;
     this.length = 1;
   }
+  push(value) {
+    const newNode = new Node(value);
+
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+      this.length = 1;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length = this.length += 1;
+    return this;
+  }
 }
 
 let myLinkedList = new LinkedList(4);
 
-console.log(myLinkedList);
+console.log(myLinkedList.push(5));
