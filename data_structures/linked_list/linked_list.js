@@ -160,11 +160,33 @@ class LinkedList {
     this.length -= 1;
     return temp;
   }
+
+  reverse(k) {
+    let tempHead = this.head;
+    this.head = this.tail;
+    this.tail = tempHead;
+
+    let tempHeadNext = tempHead.next;
+    let tempHeadPrev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      tempHeadNext = tempHead.next;
+      tempHead.next = tempHeadPrev;
+      tempHeadPrev = tempHead;
+      tempHead = tempHeadNext;
+    }
+    return this;
+  }
 }
 
 let myLinkedList = new LinkedList(0);
 
+console.log(myLinkedList.push(1));
 console.log(myLinkedList.push(2));
+console.log(myLinkedList.push(3));
+console.log(myLinkedList.push(4));
+
+console.log(myLinkedList.push(5));
 // console.log(myLinkedList.push(10));
 // console.log(myLinkedList.pop());
 // console.log(myLinkedList.pop());
@@ -174,8 +196,9 @@ console.log(myLinkedList.push(2));
 // console.log(myLinkedList.unshift(3));
 // console.log(myLinkedList.get(5));
 // console.log(myLinkedList.set(1, 2));
-console.log(myLinkedList.insert(1, 1));
-console.log(myLinkedList.remove(1));
-
+// console.log(myLinkedList.insert(1, 1));
+// console.log(myLinkedList.remove(1));
+console.log(myLinkedList);
+console.log(myLinkedList.reverse());
 // pop:
 // edge case - empty or one item
