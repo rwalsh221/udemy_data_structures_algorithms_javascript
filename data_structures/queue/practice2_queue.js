@@ -1,3 +1,4 @@
+// ENQUEUE - DEQUEUE
 class Node {
   constructor(value) {
     this.value = value;
@@ -8,41 +9,40 @@ class Node {
 class Queue {
   constructor(value) {
     const newNode = new Node(value);
-    this.first = newNode;
-    this.last = newNode;
+    this.front = newNode;
+    this.back = newNode;
     this.length = 1;
   }
 
-  //   ADD TO END OF QUEUE
-  enqueue(value) {
-    const newNode = new Node(value);
-    if (this.length === 0) {
-      this.first = newNode;
-      this.last = newNode;
-    } else {
-      this.last.next = newNode;
-      this.last = newNode;
-    }
+  createNode(value) {
+    return new Node(value);
+  }
 
+  enqueue(value) {
+    const newNode = this.createNode(value);
+    if (this.length === 0) {
+      this.front = newNode;
+      this.back = newNode;
+    } else {
+      this.back.next = newNode;
+      this.back = newNode;
+    }
     this.length += 1;
     return this;
   }
 
-  //   REMOVE NODE FROM BEGINNING OF QUEUE AND RETURN NODE
   dequeue() {
-    if (this.length === 0) {
+    if (this.front === null) {
       return undefined;
     }
-    const temp = this.first;
-
+    const temp = this.front;
     if (this.length === 1) {
-      this.first = null;
-      this.last = null;
+      this.front = null;
+      this.back = null;
     } else {
-      this.first = temp.next;
+      this.front = this.front.next;
       temp.next = null;
     }
-
     this.length -= 1;
     return temp;
   }
