@@ -21,7 +21,6 @@ class Stack {
       newNode.next = this.top;
       this.top = newNode;
     }
-
     this.length += 1;
     return this;
   }
@@ -32,8 +31,12 @@ class Stack {
       return undefined;
     }
     const temp = this.top;
-    this.top = this.top.next;
-    temp.next = null;
+    if (this.length === 1) {
+      this.top = null;
+    } else {
+      this.top = this.top.next;
+      temp.next = null;
+    }
     this.length -= 1;
     return temp;
   }

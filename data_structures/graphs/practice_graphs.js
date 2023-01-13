@@ -1,11 +1,59 @@
 class Graph {
-  constructor() {}
+  constructor() {
+    this.adjacencyList = {};
+  }
 
-  addVertex(vertex) {}
+  addVertex(vertex) {
+    if (!this.adjacencyList[vertex]) {
+      this.adjacencyList[vertex] = [];
+      return true;
+    }
+    return false;
+  }
 
-  addEdge(vertex1, vertex2) {}
+  addEdge(vertex1, vertex2) {
+    if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {
+      this.adjacencyList[vertex1].push(vertex2);
+      this.adjacencyList[vertex2].push(vertex1);
+      return true;
+    }
+    return false;
+  }
 
-  removeEdge(vertex1, vertex2) {}
+  removeEdge(vertex1, vertex2) {
+    if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {
+      this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+        (vertex) => vertex !== vertex2
+      );
+      this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+        (vertex) => vertex !== vertex1
+      );
+      return true;
+    }
+    return false;
+  }
 
-  removeVertex(vertex) {}
+  removeVertex(vertex) {
+    if (this.adjacencyList[vertex]) {
+      this.adjacencyList[vertex].forEach((el) => {
+        this.removeEdge(vertex, el);
+      });
+
+      delete this.adjacencyList[vertex];
+      return true;
+    }
+    return false;
+  }
+
+  removeVertex2(vertex) {
+    if (this.adjacencyList[vertex]) {
+      this.adjacencyList[vertex].forEach((el) => {
+        this.adjacencyList[el].filter((v) => v !== vertex);
+      });
+
+      delete this.adjacencyList[vertex];
+      return true;
+    }
+    return false;
+  }
 }
