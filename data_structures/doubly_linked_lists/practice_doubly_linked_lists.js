@@ -37,11 +37,13 @@ class DoublyLinkedList {
       this.head = null;
       this.tail = null;
     } else {
-      this.tail = temp.prev;
+      this.tail = this.tail.prev;
       this.tail.next = null;
       temp.prev = null;
     }
+
     this.length -= 1;
+
     return temp;
   }
   //   ADD NODE TO BEGINNING OF DOUBLY LINKED LIST
@@ -68,7 +70,7 @@ class DoublyLinkedList {
       this.head = null;
       this.tail = null;
     } else {
-      this.head = temp.next;
+      this.head = this.head.next;
       this.head.prev = null;
       temp.next = null;
     }
@@ -94,7 +96,7 @@ class DoublyLinkedList {
       }
     } else {
       temp = this.tail;
-      for (let i = this.length; index > i; i--) {
+      for (let i = this.length - 1; i > index; i--) {
         temp = temp.prev;
       }
     }
@@ -122,38 +124,19 @@ class DoublyLinkedList {
     if (index < 0 || index > this.length) {
       return false;
     }
-    const newNode = new Node(value);
-    const nodeAtIndex = this.get(index);
 
-    newNode.prev = nodeAtIndex.prev;
-    nodeAtIndex.prev.next = newNode;
-    newNode.next = nodeAtIndex;
-    nodeAtIndex.prev = newNode;
+    const newNode = new Node(value);
+    const nodeAtIndex = this.get(index - 1);
+
+    newNode.next = nodeAtIndex.next;
+    nodeAtIndex.next.prev = newNode;
+    nodeAtIndex.next = newNode;
+    newNode.prev = nodeAtIndex;
 
     this.length += 1;
-    return true;
+    return this;
   }
 
   //   REMOVE NODE AT INDEX AND RETURN NODE
-  remove(index) {
-    if (index === 0) {
-      return this.shift();
-    }
-    if (index === this.length - 1) {
-      return this.pop();
-    }
-    if (index < 0 || index >= this.length) {
-      return undefined;
-    }
-
-    const nodeAtIndex = this.get(index);
-
-    nodeAtIndex.next.prev = nodeAtIndex.prev;
-    nodeAtIndex.prev.next = nodeAtIndex.next;
-
-    nodeAtIndex.next = null;
-    nodeAtIndex.prev = null;
-    this.length -= 1;
-    return nodeAtIndex;
-  }
+  remove(index) {}
 }

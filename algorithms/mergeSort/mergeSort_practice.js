@@ -2,10 +2,10 @@ const arr1 = [1, 3, 7, 8];
 const arr2 = [2, 4, 5, 6];
 
 const merge = (array1, array2) => {
-  console.log('merge', array1, array2);
-  let combined = [];
-  let i = 0;
-  let j = 0;
+  // MERGE TWO ARRAYS
+  const combined = [];
+  const i = 0;
+  const j = 0;
 
   while (i < array1.length && j < array2.length) {
     if (array1[i] < array2[j]) {
@@ -36,16 +36,16 @@ const testArray = ['i', 'h', 'a', 'r', 'r', 'd', 'c'];
 // console.log(newArray);
 
 const mergeSort = (array) => {
+  // SPLIT THE ARRAYS
   if (array.length === 1) {
     return array;
   }
+  const mid = Math.floor(array.length / 2);
+  const left = array.slice(0, mid);
 
-  let mid = Math.floor(array.length / 2);
-  let left = array.slice(0, mid);
-  let right = array.slice(mid);
-  console.log(left, 'leftftf');
-  console.log(newArray);
-  return merge(mergeSort(left), mergeSort(right));
+  const right = array.slice(mid);
+
+  merge(mergeSort(left), mergeSort(right));
 };
 
 console.log(mergeSort(newArray));

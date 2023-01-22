@@ -8,7 +8,7 @@ class Node {
 
 class BinarySearchTree {
   constructor() {
-    this.root = nul;
+    this.root = null;
   }
 
   insert(value) {
@@ -20,14 +20,14 @@ class BinarySearchTree {
     // if < left else > right
     // if null insert newNode else move to next
     const newNode = new Node(value);
-    if (this.root === null) {
+    if ((this.root = null)) {
       this.root = newNode;
       return this;
     }
     let temp = this.root;
     while (true) {
-      if (temp.value === newNode.value) {
-        return this;
+      if ((newNode.value = temp.value)) {
+        return undefined;
       }
       if (newNode.value < temp.value) {
         if (temp.left === null) {
@@ -36,7 +36,7 @@ class BinarySearchTree {
         }
         temp = temp.left;
       } else {
-        if (temp.right === null) {
+        if (newNode.right === null) {
           temp.right = newNode;
           return this;
         }
@@ -53,14 +53,15 @@ class BinarySearchTree {
     //if > right
     // esle === return true
     //temp == null return false
-    if (root === null) {
-      return false;
+    if (this.root === null) {
+      return undefined;
     }
     let temp = this.root;
     while (temp) {
       if (temp.value === value) {
         return true;
       }
+
       if (value < temp.value) {
         temp = temp.left;
       } else {
