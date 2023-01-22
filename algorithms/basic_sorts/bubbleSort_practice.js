@@ -3,7 +3,7 @@ const arr2 = [567, 6, 1, 2, 3, 4, 5];
 
 const bubbleSort = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-    for (let j = 0; j < i; j++) {
+    for (j = 0; j < i; j++) {
       if (array[j] > array[j + 1]) {
         let temp = array[j];
         array[j] = array[j + 1];

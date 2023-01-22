@@ -3,9 +3,9 @@ const arr = [890, 7655, 4, 2, 6, 5, 1, 3];
 
 const insertionSort = (array) => {
   let i, j, temp;
-  for (let i = 1; i < array.length; i++) {
+  for (i = 1; i < array.length; i++) {
     temp = array[i];
-    for (let j = i - 1; array[j] > array[i] && j > -1; j--) {
+    for (j = i - 1; array[j] > temp; j--) {
       array[j + 1] = array[j];
     }
     array[j + 1] = temp;
