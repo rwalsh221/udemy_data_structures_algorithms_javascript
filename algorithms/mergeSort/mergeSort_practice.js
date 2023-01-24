@@ -3,30 +3,25 @@ const arr2 = [2, 4, 5, 6];
 
 const merge = (array1, array2) => {
   // MERGE TWO ARRAYS
-  const combined = [];
-  const i = 0;
-  const j = 0;
-
-  while (i < array1.length && j < array2.length) {
+  const combindedArray = [];
+  let i = 0;
+  let j = 0;
+  while (i < array1.length || j < array2.length) {
     if (array1[i] < array2[j]) {
-      combined.push(array1[i]);
+      combindedArray.push(array1[i]);
       i++;
     } else {
-      combined.push(array2[j]);
+      combindedArray.push(array2[j]);
       j++;
     }
   }
-
-  while (i < array1.length) {
-    combined.push(array1[i]);
-    i++;
+  if (i === array1.length) {
+    combindedArray = [...combindedArray, ...array2];
   }
-
-  while (j < array2.length) {
-    combined.push(array2[j]);
-    j++;
+  if (j === array2.length) {
+    combindedArray = [...combindedArray, ...array1];
   }
-  return combined;
+  return combindedArray;
 };
 
 // console.log(merge(arr1, arr2));
@@ -41,11 +36,10 @@ const mergeSort = (array) => {
     return array;
   }
   const mid = Math.floor(array.length / 2);
-  const left = array.slice(0, mid);
+  const left = array.slice(0, mid - 1);
+  const right = array.slice(mid, array.length - 1);
 
-  const right = array.slice(mid);
-
-  merge(mergeSort(left), mergeSort(right));
+  mergeSort(merge(left, right));
 };
 
 console.log(mergeSort(newArray));

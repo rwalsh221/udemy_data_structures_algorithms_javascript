@@ -23,13 +23,21 @@ console.log(newArray);
 // pivot(newArray);
 console.log(newArray);
 
-const quickSort = (array, left = 0, right = array.length - 1) => {
+const quickSort = (
+  array,
+  left = 0,
+  right = array.length - 1,
+  side = 'init'
+) => {
+  console.log(side);
   if (left < right) {
+    console.log(array);
     let pivotIndex = pivot(array, left, right);
-    quickSort(array, left, pivotIndex - 1);
-    quickSort(array, pivotIndex + 1, right);
+    quickSort(array, left, pivotIndex - 1, 'left');
+    quickSort(array, pivotIndex + 1, right, 'right');
   }
+  console.log(left, right, true);
   return array;
 };
 
-quickSort(newArray);
+console.log(quickSort(newArray));

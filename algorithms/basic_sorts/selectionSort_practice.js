@@ -10,9 +10,9 @@ const selectionSort = (array) => {
       }
     }
     if (min !== i) {
-      let temp = array[i];
-      array[i] = array[temp];
-      array[temp] = array[i];
+      const temp = array[i];
+      array[i] = array[min];
+      array[min] = array[i];
     }
   }
   return array;
