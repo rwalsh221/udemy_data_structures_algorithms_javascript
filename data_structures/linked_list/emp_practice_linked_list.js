@@ -13,7 +13,6 @@ class LinkedList {
     this.tail = this.head;
     this.length = 1;
   }
-
   push(value) {
     const newNode = new Node(value);
     if (this.head === null) {
@@ -33,6 +32,29 @@ class LinkedList {
     }
     let pre = null;
     let temp = this.head;
+    while (temp.next) {
+      pre = temp;
+      temp = temp.next;
+    }
+
+    this.tail = pre;
+    this.tail.next = null;
+    this.length -= 1;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return temp;
+  }
+
+  pop() {
+    // IF LINKED LIST IS EMPTY
+    if (this.head === null) {
+      return undefined;
+    }
+
+    let temp = this.head;
+    let pre = this.head;
 
     while (temp.next) {
       pre = temp;
@@ -42,6 +64,7 @@ class LinkedList {
     this.tail.next = null;
     this.length -= 1;
 
+    // IF LINKED LIST ONLY CONTAINED ONE ITEM
     if (this.length === 0) {
       this.head = null;
       this.tail = null;
@@ -69,10 +92,10 @@ class LinkedList {
     const temp = this.head;
     this.head = temp.next;
     temp.next = null;
-    if (this.head === null) {
+    this.length -= 1;
+    if (this.length === 0) {
       this.tail = null;
     }
-    this.length -= 1;
     return temp;
   }
 
@@ -86,6 +109,7 @@ class LinkedList {
     if (index < 0 || index >= this.length) {
       return undefined;
     }
+
     let temp = this.head;
     for (let i = 0; i < index; i++) {
       temp = temp.next;
@@ -102,7 +126,7 @@ class LinkedList {
     return false;
   }
 
-  insert(index, value) {
+  add(index, value) {
     if (index === 0) {
       return this.unshift(value);
     }
@@ -113,13 +137,13 @@ class LinkedList {
       return undefined;
     }
 
-    const nodeAtIndex = this.get(index - 1);
     const newNode = new Node(value);
+    const nodeAtIndex = this.get(index - 1);
 
     newNode.next = nodeAtIndex.next;
     nodeAtIndex.next = newNode;
-    this.length += 1;
-    return true;
+    this.length -= 1;
+    return this;
   }
 
   remove(index) {
@@ -133,10 +157,10 @@ class LinkedList {
       return undefined;
     }
 
-    const nodeAtIndex = this.get(index);
-    const temp = nodeAtIndex.next;
+    const pre = this.get(index - 1);
+    const temp = pre.next;
 
-    nodeAtIndex.next = temp.next;
+    pre.next = temp.next;
     temp.next = null;
     this.length -= 1;
     return temp;
@@ -148,7 +172,7 @@ class LinkedList {
     this.tail = temp;
 
     let pre = null;
-    let next = null;
+    let next = temp;
 
     for (let i = 0; i < this.length; i++) {
       next = temp.next;

@@ -1,34 +1,29 @@
 const newArray = [4, 6, 1, 7, 3, 2, 5];
 
 const swap = (array, firstIndex, secondIndex) => {
-  // SWAP ELEMENT POSITION IN ARRAY
   const temp = array[firstIndex];
   array[firstIndex] = array[secondIndex];
   array[secondIndex] = temp;
 };
 
-const pivot = (array, pivotIndex = 0, endIndex = array.length - 1) => {
-  // LOOP THROUGH ARRAY/ RETURN SWAP
+const pivot = (array, pivotIndex = 0, lastIndex = array.length - 1) => {
   let swapIndex = pivotIndex;
-  for (let i = pivotIndex + 1; i <= endIndex; i++) {
+  for (let i = pivotIndex + 1; i <= lastIndex; i++) {
     if (array[i] < array[pivotIndex]) {
       swapIndex++;
-      swap(array, swapIndex, i);
+      swap(array, i, swapIndex);
     }
   }
   swap(array, pivotIndex, swapIndex);
   return swapIndex;
 };
 
-// pivot(newArray);
-
-const quickSort = (array, left = 0, right = array.length - 1) => {
-  if (left < right) {
-    const pivotIndex = pivot(array, left, right);
-    quickSort(array, left, pivotIndex - 1);
-    quickSort(array, pivotIndex + 1, right);
+const quickSort = (array, firstIndex = 0, lastIndex = array.length - 1) => {
+  if (firstIndex < lastIndex) {
+    const pivotIndex = pivot(array, firstIndex, lastIndex);
+    quickSort(array, firstIndex, pivotIndex - 1);
+    quickSort(array, pivotIndex + 1, lastIndex);
   }
   return array;
 };
-
 console.log(quickSort(newArray));

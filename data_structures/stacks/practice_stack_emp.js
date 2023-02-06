@@ -3,7 +3,7 @@
 class Node {
   constructor(value) {
     this.value = value;
-    this.next = null;
+    this.next = this.next;
   }
 }
 
@@ -16,11 +16,11 @@ class Stack {
 
   push(value) {
     const newNode = new Node(value);
-
     if (this.top === null) {
       this.top = newNode;
     } else {
-      this.top.next = newNode;
+      newNode.next = this.top;
+      this.top = newNode;
     }
     this.length += 1;
     return this;
@@ -31,12 +31,7 @@ class Stack {
       return undefined;
     }
     const temp = this.top;
-    if (this.length === 1) {
-      this.top = null;
-    } else {
-      this.top = temp.next;
-      temp.next = null;
-    }
+    this.top = this.top.next;
     this.length -= 1;
     return temp;
   }
