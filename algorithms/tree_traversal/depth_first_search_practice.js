@@ -78,8 +78,9 @@ class BinarySearchTree {
     return currentNode;
   }
 
-  depthFirstSearchPreOrder() {
+  DFSPreOrder() {
     const results = [];
+
     const traverse = (currentNode) => {
       results.push(currentNode.value);
       if (currentNode.left) {
@@ -93,7 +94,7 @@ class BinarySearchTree {
     return results;
   }
 
-  depthFirstSearchPostOrder() {
+  DFSPostOrder() {
     const results = [];
 
     const traverse = (currentNode) => {
@@ -105,12 +106,11 @@ class BinarySearchTree {
       }
       results.push(currentNode.value);
     };
-
     traverse(this.root);
     return results;
   }
 
-  depthFirstSearchInOrder() {
+  DFSInOrder() {
     const results = [];
 
     const traverse = (currentNode) => {

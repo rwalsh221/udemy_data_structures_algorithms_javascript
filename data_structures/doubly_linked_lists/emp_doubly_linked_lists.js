@@ -1,5 +1,4 @@
 // add/remove front/end, get,set,add/remove at index/
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -20,14 +19,13 @@ class DoublyLinkedList {
     const newNode = new Node(value);
     if (this.head === null) {
       this.head = newNode;
-      this.tail = this.head;
+      this.tail = newNode;
     } else {
       newNode.prev = this.tail;
       this.tail.next = newNode;
       this.tail = newNode;
     }
     this.length += 1;
-    return this;
   }
 
   pop() {
@@ -35,20 +33,19 @@ class DoublyLinkedList {
       return undefined;
     }
     const temp = this.tail;
-    if (this.length === 1) {
-      this.head = null;
-      this.tail = null;
-    } else {
-      this.tail = this.tail.prev;
-      this.tail.next = null;
-      temp.prev = null;
-    }
+    this.tail = temp.prev;
+    temp.prev = null;
+
     this.length -= 1;
+    if (this.length === 0) {
+      this.head === null;
+    }
     return temp;
   }
 
   unshift(value) {
     const newNode = new Node(value);
+
     if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
@@ -65,16 +62,16 @@ class DoublyLinkedList {
     if (this.head === null) {
       return undefined;
     }
+
     const temp = this.head;
-    if (this.length === 1) {
-      this.head = null;
-      this.tail = null;
-    } else {
-      this.head = this.head.next;
-      this.head.prev = null;
-      temp.next = null;
-    }
+
+    this.head = this.head.next;
+    this.head.prev = null;
+    temp.next = null;
     this.length -= 1;
+    if (this.length === 0) {
+      this.tail = null;
+    }
     return temp;
   }
 
@@ -110,7 +107,7 @@ class DoublyLinkedList {
       nodeAtIndex.value = value;
       return true;
     }
-    return false;
+    return undefined;
   }
 
   insert(index, value) {
@@ -125,15 +122,15 @@ class DoublyLinkedList {
     }
 
     const newNode = new Node(value);
-    const temp = this.get(index - 1);
+    const nodeAtIndex = this.get(index - 1);
 
-    newNode.next = temp.next;
-    newNode.prev = temp;
-    temp.next.prev = newNode;
-    temp.next = newNode;
+    newNode.next = nodeAtIndex.next;
+    newNode.prev = nodeAtIndex;
+    nodeAtIndex.next.prev = newNode;
+    nodeAtIndex.next = newNode;
 
     this.length += 1;
-    return true;
+    return this;
   }
 
   remove(index) {
@@ -147,14 +144,13 @@ class DoublyLinkedList {
       return undefined;
     }
 
-    const temp = this.get(index);
+    const nodeAtIndex = this.get(index);
 
-    temp.prev.next = temp.next;
-    temp.next.prev = temp.prev;
-    temp.next = null;
-    temp.prev = null;
-
+    nodeAtIndex.prev.next = nodeAtIndex.next;
+    nodeAtIndex.next.prev = nodeAtIndex.prev;
+    nodeAtIndex.next = null;
+    nodeAtIndex.prev = null;
     this.length -= 1;
-    return temp;
+    return nodeAtIndex;
   }
 }

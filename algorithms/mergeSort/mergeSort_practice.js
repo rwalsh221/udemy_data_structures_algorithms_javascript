@@ -26,11 +26,11 @@ const merge = (arr1, arr2) => {
     combinedArray.push(arr1[i]);
     i++;
   }
-  while (i < arr2.length) {
+
+  while (j < arr2.length) {
     combinedArray.push(arr2[j]);
     j++;
   }
-
   return combinedArray;
 };
 

@@ -7,23 +7,27 @@ class HashTable {
 
   _hash(key) {
     let hash = 0;
+
     for (let i = 0; i < key.length; i++) {
       hash = (hash + key.charCodeAt(i) * 23) % this.dataMap.length;
     }
+    return hash;
   }
 
-  set(key, value) {
-    const index = this._hash(key);
+  add(key, value) {
+    let index = this._hash(key);
 
     if (!this.dataMap[index]) {
       this.dataMap[index] = [];
     }
 
     this.dataMap[index].push([key, value]);
+
+    return this;
   }
 
   get(key) {
-    const index = this._hash(key);
+    let index = this._hash(key);
 
     if (this.dataMap[index]) {
       let value;
@@ -38,13 +42,14 @@ class HashTable {
   }
 
   keys() {
-    const keyArray = [];
+    const keysArray = [];
 
     this.dataMap.forEach((el) => {
       el.forEach((el) => {
-        keyArray.push(el[0]);
+        keysArray.push(el[0]);
       });
     });
-    return keyArray;
+
+    return keysArray;
   }
 }
