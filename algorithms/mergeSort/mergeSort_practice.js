@@ -31,6 +31,7 @@ const merge = (arr1, arr2) => {
     combinedArray.push(arr2[j]);
     j++;
   }
+
   return combinedArray;
 };
 
