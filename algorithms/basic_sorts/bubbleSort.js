@@ -13,4 +13,32 @@ const bubbleSort = (array) => {
   return array;
 };
 
+const selectionSort = (array) => {
+  for (let i = 0; i < array.length; i++) {
+    let min = i;
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] < array[min]) {
+        min = j;
+      }
+    }
+    if (min !== i) {
+      const temp = array[i];
+      array[i] = array[min];
+      array[min] = temp;
+    }
+  }
+  return array;
+};
+
+const insertionSort = (array) => {
+  let i, j, min;
+  for (i = 1; i < array.length; i++) {
+    min = array[i];
+    for (j = i - 1; array[j] > min && j > -1; j--) {
+      array[j + 1] = array[j];
+    }
+    array[j + 1] = min;
+  }
+};
+
 console.log(bubbleSort(arr));

@@ -47,15 +47,40 @@ class HashTable {
     this.dataMap.forEach((el) => el.forEach((el) => keyArray.push(el[0])));
     return keyArray;
   }
+
+  // HT: Item In Common
+  itemInCommon(arr1, arr2) {
+    const compareObj = {};
+    arr1.forEach((el) => (compareObj[el] = true));
+    let itemInCommon = false;
+    arr2.forEach((el) => {
+      if (compareObj[el]) {
+        itemInCommon = true;
+      }
+    });
+    return itemInCommon;
+  }
+
+  // HT: First Non-Repeating Character
+  firstNonRepeatingCharacter(string) {
+    let result = null;
+    const charObj = {};
+    for (let i = 0; i < string.length; i++) {
+      if (charObj[string[i]]) {
+        charObj[string[i]] = false;
+      } else {
+        charObj[string[i]] = true;
+      }
+    }
+    for (let i = 0; i < string.length; i++) {
+      if (charObj[string[i]] === true) {
+        result = string[i];
+        return result;
+      }
+    }
+  }
 }
 
 const newHashTable = new HashTable();
-
-newHashTable.set('bolts', 7);
-newHashTable.set('bolts', 20);
-newHashTable.set('nails', 7);
-newHashTable.set('hammers', 7);
-console.log(newHashTable);
-console.log(newHashTable.dataMap);
-console.log(newHashTable.get('boltss'));
-console.log(newHashTable.keys());
+console.log(newHashTable.itemInCommon([1, 2, 3], [4, 5, 6]));
+console.log(newHashTable.firstNonRepeatingCharacter('aabbcde'));

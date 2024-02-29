@@ -153,11 +153,199 @@ class DoublyLinkedList {
     this.length -= 1;
     return temp;
   }
+
+  swapFirstLast() {
+    if (this.head === null) {
+      return false;
+    }
+    const temp = this.head;
+    if (this.length === 1) {
+      this.head = this.tail;
+      this.tail = temp;
+    } else {
+      const next = this.head.next;
+      const prev = this.tail.prev;
+
+      this.head.next = this.tail.next;
+      this.head.prev = this.tail.prev;
+      prev.next = this.head;
+      this.tail.next = next;
+      this.tail.prev = null;
+      next.prev = this.tail;
+
+      this.head = this.tail;
+
+      this.tail = temp;
+    }
+    return this;
+  }
+
+  logHead() {
+    console.log(this.head);
+  }
+
+  logTail() {
+    console.log(this.tail);
+  }
+
+  isPalindrome() {
+    if (this.head === null) {
+      return true;
+    }
+    if (this.length % 2 === 0) {
+      return false;
+    }
+    let headTemp = this.head;
+    let tailTemp = this.tail;
+
+    for (let i = 0; i <= Math.floor(this.length / 2); i++) {
+      console.log(headTemp);
+      console.log(tailTemp);
+      if (headTemp.value !== tailTemp.value) {
+        return false;
+      }
+
+      headTemp = headTemp.next;
+      tailTemp = tailTemp.prev;
+    }
+
+    return true;
+  }
+  // implement a member function called swapPairs() that swaps every two adjacent nodes of a doubly linked list.
+  swapPairs1() {
+    if (this.length < 2) {
+      return undefined;
+    }
+
+    let temp = this.head;
+
+    const newNode = new Node();
+    newNode.next = this.head.next;
+    this.head = newNode;
+
+    let next = temp.next;
+    console.log(temp);
+    console.log(next);
+
+    let prev = temp.prev;
+
+    temp.next = next.next.next;
+    temp.prev = next;
+
+    next.next = temp;
+    next.prev = prev;
+    temp = temp.next;
+
+    this.head = newNode.next;
+    newNode.next = null;
+    const swapNodes = (node) => {};
+    // for (let i = 0; i < this.length; i++) {
+    //   //maybe minus 1 of length
+    //   console.log(next);
+    //   const next = temp.next;
+    //   // console.log(next);
+    //   console.log(temp);
+    //   const prev = temp.prev;
+    //   if (temp.next) {
+    //     temp.next = next.next;
+    //     temp.prev = next;
+
+    //     next.next = temp;
+    //     next.prev = prev;
+    //     temp = temp.next;
+    //   }
+    // }
+
+    while (temp.next) {
+      console.log('sadssdsa');
+      console.log(temp);
+      console.log(temp.prev);
+      temp.prev = temp.prev.next;
+      //maybe minus 1 of length
+      next = temp.next;
+      // console.log(temp);
+      // console.log(next);
+
+      prev = temp.prev;
+      // console.log(prev);
+
+      // console.log(temp.next);
+      temp.next = next.next;
+      temp.prev = next;
+      // console.log(temp.next);
+      // temp.prev.next = temp.next.next;
+
+      next.next = temp;
+      next.prev = prev;
+      temp = temp.next;
+      if (temp === null) {
+        break;
+      }
+    }
+
+    return this;
+  }
+
+  swapPairs() {
+    if (this.length < 2) {
+      return false;
+    }
+
+    let temp = this.head;
+    this.head = temp.next;
+    // const dummyNode = new Node(0);
+    // dummyNode.next = this.head.next;
+    // this.head = dummyNode;
+
+    while (true) {
+      if (temp === null || temp.next === null) {
+        break;
+      }
+
+      let next = temp.next;
+      let prev = temp.prev;
+
+      if (prev) {
+        prev.next = temp.next;
+      }
+      if (next.next === null) {
+        temp.next = next.next;
+      } else {
+        temp.next = next.next;
+        temp.next.prev = temp;
+      }
+
+      temp.prev = next;
+      next.next = temp;
+      next.prev = prev;
+      temp = temp.next;
+    }
+
+    // this.head = dummyNode.next;
+    // dummyNode.next = null;
+    return this;
+  }
 }
 
 const myDoublyLinkedList = new DoublyLinkedList(1);
-console.log(myDoublyLinkedList.push(2));
-console.log(myDoublyLinkedList.push(3));
-console.log(myDoublyLinkedList.push(4));
+// console.log(myDoublyLinkedList.push(2));
+// console.log(myDoublyLinkedList.push(3));
+// console.log(myDoublyLinkedList.push(4));
+// console.log(myDoublyLinkedList.push(7));
+// console.log(myDoublyLinkedList.push(2));
+// console.log(myDoublyLinkedList.push(1));
+myDoublyLinkedList.shift();
+myDoublyLinkedList.push(1);
+myDoublyLinkedList.push(2);
+myDoublyLinkedList.push(3);
+myDoublyLinkedList.push(4);
+// myDoublyLinkedList.push(5);
+
+// myDoublyLinkedList.logHead();
+// myDoublyLinkedList.logTail();
 // console.log(myDoublyLinkedList.set(10, 99));
-console.log(myDoublyLinkedList.remove(1));
+// console.log(myDoublyLinkedList.remove(1));
+// console.log(myDoublyLinkedList.swapFirstLast());
+// console.log(this.head);
+console.log(myDoublyLinkedList.isPalindrome());
+console.log(myDoublyLinkedList.swapPairs());

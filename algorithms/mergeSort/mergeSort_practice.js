@@ -8,31 +8,31 @@ const testArray = ['i', 'h', 'a', 'r', 'r', 'd', 'c'];
 // console.log(newArray);
 
 const merge = (arr1, arr2) => {
-  const combinedArray = [];
   let i = 0;
   let j = 0;
+  const combined = [];
 
   while (i < arr1.length && j < arr2.length) {
     if (arr1[i] < arr2[j]) {
-      combinedArray.push(arr1[i]);
+      combined.push(arr1[i]);
       i++;
     } else {
-      combinedArray.push(arr2[j]);
+      combined.push(arr2[j]);
       j++;
     }
   }
 
   while (i < arr1.length) {
-    combinedArray.push(arr1[i]);
+    combined.push(arr1[i]);
     i++;
   }
 
   while (j < arr2.length) {
-    combinedArray.push(arr2[j]);
+    combined.push(arr2[j]);
     j++;
   }
 
-  return combinedArray;
+  return combined;
 };
 
 const mergeSort = (array) => {

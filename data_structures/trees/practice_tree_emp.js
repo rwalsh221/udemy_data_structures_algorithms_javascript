@@ -1,5 +1,4 @@
 // insert / contains / min value / BFS / DFS PRE POST IN
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -17,38 +16,39 @@ class BinarySearchTree {
     const newNode = new Node(value);
     if (this.root === null) {
       this.root = newNode;
-      return true;
+      return;
     }
 
     let temp = this.root;
     while (true) {
-      if (temp.value === newNode.value) {
+      if (newNode.value === temp.value) {
         return undefined;
       }
       if (newNode.value < temp.value) {
-        if (temp.left) {
-          temp = temp.left;
+        if (temp.left === null) {
+          temp.left = newNode;
+          return this;
         }
-        temp.left = newNode;
-        return true;
+        temp = temp.left;
       } else {
-        if (temp.right) {
-          temp = temp.right;
+        if (temp.right === null) {
+          temp.right = newNode;
+          return this;
         }
-        temp.right = newNode;
-        return true;
+        temp = temp.right;
       }
     }
   }
 
   contains(value) {
     if (this.root === null) {
-      return false;
+      return undefined;
     }
 
     let temp = this.root;
+
     while (temp) {
-      if (temp.value === value) {
+      if (value === temp.value) {
         return true;
       }
       if (value < temp.value) {
@@ -56,8 +56,8 @@ class BinarySearchTree {
       } else {
         temp = temp.right;
       }
+      return false;
     }
-    return false;
   }
 
   minValueNode(currentNode = this.root) {
@@ -68,28 +68,27 @@ class BinarySearchTree {
   }
 
   BFS() {
-    let currentNode = this.root;
+    const result = [];
     const queue = [];
-    const results = [];
-    queue.push(currentNode);
+
+    queue.push(this.root);
     while (queue.length) {
-      currentNode = queue.shift();
-      results.push(currentNode.value);
+      const currentNode = queue.shift();
+      result.push = currentNode.value;
       if (currentNode.left) {
         queue.push(currentNode.left);
-      }
-      if (currentNode.right) {
+      } else {
         queue.push(currentNode.right);
       }
     }
-    return results;
+    return result;
   }
 
   DFSPreOrder() {
-    const results = [];
+    const result = [];
 
     const traverse = (currentNode) => {
-      results.push(currentNode.value);
+      result.push(currentNode.value);
       if (currentNode.left) {
         traverse(currentNode.left);
       }
@@ -97,11 +96,14 @@ class BinarySearchTree {
         traverse(currentNode.right);
       }
     };
-    traverse(this.root);
-    return results;
+
+    traverse(currentNode);
+    return result;
   }
+
   DFSPostOrder() {
-    const results = [];
+    const result = [];
+
     const traverse = (currentNode) => {
       if (currentNode.left) {
         traverse(currentNode.left);
@@ -109,23 +111,10 @@ class BinarySearchTree {
       if (currentNode.right) {
         traverse(currentNode.right);
       }
-      results.push(currentNode.value);
+      result.push(currentNode.value);
     };
+
     traverse(this.root);
-    return results;
-  }
-  DFSInOrder() {
-    const results = [];
-    const traverse = (currentNode) => {
-      if (currentNode.left) {
-        traverse(currentNode.left);
-      }
-      results.push(currentNode.value);
-      if (currentNode.right) {
-        traverse(currentNode.right);
-      }
-    };
-    traverse(this.root);
-    return results;
+    return result;
   }
 }

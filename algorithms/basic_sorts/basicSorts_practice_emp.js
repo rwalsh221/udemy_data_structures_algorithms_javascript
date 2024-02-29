@@ -1,3 +1,5 @@
+const newArray = [1, 9, 2, 8, 3, 7, 4, 6, 5, 0];
+
 const bubbleSort = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     for (let j = 0; j < i; j++) {
@@ -16,7 +18,7 @@ const selectionSort = (array) => {
   for (let i = 0; i < array.length - 1; i++) {
     min = i;
     for (let j = i + 1; j < array.length; j++) {
-      if (array[j] < array[i]) {
+      if (array[j] < array[min]) {
         min = j;
       }
     }
@@ -31,7 +33,7 @@ const selectionSort = (array) => {
 
 const insertionSort = (array) => {
   let i, j, temp;
-  for (let i = 1; i < array.length; i++) {
+  for (i = 1; i < array.length; i++) {
     temp = array[i];
     for (j = i - 1; array[j] > temp && j > -1; j--) {
       array[j + 1] = array[j];
@@ -40,3 +42,9 @@ const insertionSort = (array) => {
   }
   return array;
 };
+
+// console.log(bubbleSort(newArray));
+// console.log(selectionSort(newArray));
+console.log(insertionSort(newArray));
+// bubbleSort([5, 3, 4, 2, 1]);
+// console.log(insertionSort([5, 3, 4, 2, 1]));
